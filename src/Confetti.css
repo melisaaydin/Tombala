@@ -1,0 +1,32 @@
+.confetti-piece {
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    opacity: 0.9;
+    border-radius: 20%;
+    transform: translate(-50%, -50%);
+    animation: explode 1s ease-out forwards;
+}
+
+.confetti-piece.circle {
+    border-radius: 50%;
+}
+
+.confetti-piece.triangle {
+    width: 0;
+    height: 0;
+
+
+}
+
+@keyframes explode {
+    0% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) translate(var(--end-x), var(--end-y)) scale(0.5) rotate(360deg);
+        opacity: 0;
+    }
+}
