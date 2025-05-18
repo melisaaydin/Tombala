@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+// packages/tombala/src/App.js
+import { Routes, Route } from 'react-router-dom';
+import Bingo from './Bingo';
+import { UserProvider, useUser } from '@TOYOTA/game-center';
+
+function TestComponent() {
+  const { user, loading } = useUser();
+  return (
+    <div>
+      {loading ? (
+        <p style={{ color: "black" }}>Loading...</p>
+      ) : user ? (
+        <p>User: {user.name}</p>
+      ) : (
+        <p>No user</p>
+      )}
+    </div>
+  );
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserProvider>
+      <Routes>
+        <Route path="/games/:gameId/lobby/:id" element={<Bingo />} />
+        <Route path="/test" element={<TestComponent />} />
+      </Routes>
+    </UserProvider>
   );
 }
 
