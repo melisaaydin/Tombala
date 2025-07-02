@@ -8,8 +8,8 @@ const Confetti = ({ trigger }) => {
     useEffect(() => {
         if (trigger && containerRef.current) {
             const container = containerRef.current;
-            const colors = ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff", "#ffa500", "#800080"]; // Array of vibrant colors
-            const confettiCount = 150; // Increased number of confetti pieces for a fuller effect
+            const colors = ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff", "#ffa500", "#800080"];
+            const confettiCount = 150;
 
             // Create and animate confetti pieces
             for (let i = 0; i < confettiCount; i++) {

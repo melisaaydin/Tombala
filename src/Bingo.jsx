@@ -10,9 +10,8 @@ import { toast } from 'react-toastify';
 import './Bingo.css';
 import { FaArrowRight } from "react-icons/fa6";
 
-// The main Bingo component for a multiplayer bingo game
+
 const Bingo = () => {
-    // Get translation function for i18n and game/room IDs from URL params
     const { t } = useTranslation('tombala');
     const { gameId, id } = useParams();
     const navigate = useNavigate();
@@ -21,7 +20,7 @@ const Bingo = () => {
 
     // State to manage the entire game, including board, players, and game progress
     const [gameState, setGameState] = useState({
-        board: Array(27).fill(null), // Player's 3x9 bingo board
+        board: Array(27).fill(null),
         selectedCells: [], // Cells marked by the player
         turn: null, // Current player's turn
         started: false, // Whether the game has started
@@ -30,7 +29,7 @@ const Bingo = () => {
         currentNumber: 1, // Latest drawn number
         drawnNumbers: [], // All numbers drawn so far
         playerColor: 'blue', // Player's assigned color
-        cingoCount: 0, // Number of "cingo" (bingo line) achievements
+        cingoCount: 0,
         allBoards: {}, // Boards of all players
         allSelectedCells: {}, // Selected cells of all players
         allPlayerColors: {}, // Colors assigned to all players
@@ -39,15 +38,15 @@ const Bingo = () => {
     // State for UI effects and game status
     const [isObstruct, setIsObstruct] = useState(false); // Blocks UI during certain actions
     const [drawnNumber, setDrawnNumber] = useState(null); // Latest drawn number for popup
-    const [stars, setStars] = useState([false, false, false]); // Tracks "cingo" stars for display
-    const [confettiTrigger, setConfettiTrigger] = useState(false); // Triggers confetti on win
-    const pWinRef = useRef(null); // Reference to winner text element
-    const restartBtnRef = useRef(null); // Reference to restart button
-    const [starPosition, setStarPosition] = useState('center'); // Position of stars for animation
+    const [stars, setStars] = useState([false, false, false]);
+    const [confettiTrigger, setConfettiTrigger] = useState(false);
+    const pWinRef = useRef(null);
+    const restartBtnRef = useRef(null);
+    const [starPosition, setStarPosition] = useState('center');
     const [hasJoined, setHasJoined] = useState(false); // Tracks if player has joined the game
     const [isLanguageReady, setIsLanguageReady] = useState(false); // Ensures language is loaded
-    const [showPlayers, setShowPlayers] = useState(false); // Toggles other players' boards visibility
-    const [, forceUpdate] = useState(0); // Forces re-render when language changes
+    const [showPlayers, setShowPlayers] = useState(false);
+    const [, forceUpdate] = useState(0);
     const isDrawingRef = useRef(false); // Prevents multiple simultaneous number draws
 
     // Synchronize language from localStorage on component mount
@@ -157,7 +156,7 @@ const Bingo = () => {
         const handleGameWon = ({ winner }) => {
             setGameState((prev) => ({ ...prev, winner }));
             if (pWinRef.current) {
-                pWinRef.current.innerHTML = `${winner.toUpperCase()} ${t('won')} <i class="fa-solid fa-crown"></i>`;
+                pWinRef.current.innerHTML = `${winner.toUpperCase()} <i class="fa-solid fa-crown">${t('won')}</i>`;
             }
             if (restartBtnRef.current) {
                 restartBtnRef.current.style.display = 'inline-flex';
@@ -427,8 +426,6 @@ const Bingo = () => {
 
     // Render other players' boards, visible only when game is active
     const renderOtherPlayersBoards = () => {
-
-
         // Don’t render if game hasn’t started, no other players, or no boards
         if (!gameState.started || gameState.players.length <= 1 || Object.keys(gameState.allBoards).length === 0) {
             return null;
